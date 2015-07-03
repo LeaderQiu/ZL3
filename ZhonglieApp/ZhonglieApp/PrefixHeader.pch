@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  ZhonglieApp
+//
+//  Created by 邱思雨 on 15/6/23.
+//  Copyright (c) 2015年 PX. All rights reserved.
+//
+
+#ifndef ZhonglieApp_PrefixHeader_pch
+#define ZhonglieApp_PrefixHeader_pch
+
+//首页职位列表  page
+#define UrlStrPosition @"http://123.57.147.235/index.php/home/position/positionList" 
+
+//六个热门搜索按钮
+#define UrlStrPositionSearchLabel @"http://123.57.147.235/index.php/home/position/positionSearchLabel"
+
+//点击热搜标签  label
+#define UrlStrPositionLabel @"http://123.57.147.235/index.php/home/position/positionLabel"
+
+//输入文字搜索  keywords
+#define UrlStrPositionSearch @"http://123.57.147.235/index.php/home/position/positionSearch"
+
+//职位详情页    pid
+#define UrlStrPositionContent @"http://123.57.147.235/index.php/home/position/positionContent"
+
+//简历列表
+#define UrlStrResumeList @"http://123.57.147.235/index.php/home/resume/resumeList"
+
+//按条件搜索 keywords  time reward rewards page sex
+#define UrlStrPositionSearch @"http://123.57.147.235/index.php/home/position/positionSearch"
+
+#endif
