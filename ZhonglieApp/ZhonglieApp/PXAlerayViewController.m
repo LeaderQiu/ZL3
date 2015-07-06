@@ -184,14 +184,33 @@
     
     self.AlertV1.hidden = YES;
     self.AlertV2.hidden = YES;
-    
-    UIView *AlertV3 = [[UIView alloc]initWithFrame:CGRectMake(10, 44, 300, 59)];
+
+    UIView *AlertV3 = [UIView new];
     _AlertV3 = AlertV3;
-    
+   
     UIImageView *backImage1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"弹出框3"]];
     
     [AlertV3 addSubview:backImage1];
     [self.view addSubview:AlertV3];
+    
+    
+    //AlertV约束
+    
+    [AlertV3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(10);
+        make.top.equalTo(self.view.mas_top).offset(44);
+        make.right.equalTo(self.view).offset(-10);
+        make.height.mas_equalTo(59);
+    }];
+    
+    //backImage约束
+    [backImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(10);
+        make.top.equalTo(self.view.mas_top).offset(44);
+        make.right.equalTo(self.view).offset(-10);
+        make.height.mas_equalTo(59);
+        make.width.mas_equalTo(300);
+    }];
 }
 
 //点击空白 隐藏AlertV  （没什么用）

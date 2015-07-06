@@ -205,9 +205,11 @@
     return 44.0f;
 }
 
-//设置headerView的属性
+//headerView设置headerView的属性
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+
+    
     UIView *headerV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
     
     UIImageView *backImageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"头部背景"]];
@@ -216,140 +218,70 @@
     
     [self.view addSubview:headerV];
     
-//    UIView *headerV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    //backImageV约束
+    [backImageV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(headerV);
+    }];
     
     //创建三个筛选按钮
-
     UIButton *ShiJian = [UIButton new];
     
-    [ShiJian setBackgroundImage:[UIImage imageNamed:@"发布时间"] forState:UIControlStateNormal];
-
+    [ShiJian setImage:[UIImage imageNamed:@"发布时间"] forState:UIControlStateNormal];
+    
+    [ShiJian addTarget:self action:@selector(ShiJianClick) forControlEvents:UIControlEventTouchUpInside];
     
     [headerV addSubview:ShiJian];
-      
-    UIButton *JinE = [UIButton new];
     
-    [JinE setBackgroundImage:[UIImage imageNamed:@"奖励金额"] forState:UIControlStateNormal];
 
-    [headerV addSubview:JinE];
+    UIButton *ZhuangTai = [UIButton new];
+
     
-    UIButton *ShaiXuan = [UIButton new];
+    [ZhuangTai setImage:[UIImage imageNamed:@"奖励金额"] forState:UIControlStateNormal];
     
-    [ShaiXuan setBackgroundImage:[UIImage imageNamed:@"更多筛选"] forState:UIControlStateNormal];
+    [ZhuangTai addTarget:self action:@selector(ZhuangTaiClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [headerV addSubview:ShaiXuan];
+    [headerV addSubview:ZhuangTai];
     
+
+    UIButton *DaiYu = [UIButton new];
+
+    
+    [DaiYu setImage:[UIImage imageNamed:@"更多筛选"] forState:UIControlStateNormal];
+    
+    [DaiYu addTarget:self action:@selector(DaiYuClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [headerV addSubview:DaiYu];
     
     //ShiJian约束
     
-    int padding1 = [UIScreen mainScreen].bounds.size.width/3;
+    int padding1 = ([UIScreen mainScreen].bounds.size.width/3);
     
     [ShiJian mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headerV);
+        make.width.mas_equalTo(padding1);
         make.height.equalTo(headerV);
+        make.top.equalTo(headerV);
         make.left.equalTo(headerV);
-        make.right.equalTo(JinE.mas_left);
-        make.width.mas_equalTo(padding1);
-        
     }];
     
-    //JinE约束
-    [JinE mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headerV);
-        make.left.equalTo(ShiJian.mas_right);
+    //ZhuangTai约束
+    [ZhuangTai mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(padding1);
         make.height.equalTo(headerV);
-        make.right.equalTo(ShaiXuan.mas_left);
-        make.width.mas_equalTo(padding1);
+        make.left.equalTo(ShiJian.mas_right);
+        make.top.equalTo(headerV);
     }];
     
-    //ShaiXuan约束
-    [ShaiXuan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headerV);
-        make.left.equalTo(JinE.mas_right);
+    //DaiYu约束
+    [DaiYu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(padding1);
         make.height.equalTo(headerV);
         make.right.equalTo(headerV);
-        make.width.mas_equalTo(padding1);
+        make.top.equalTo(headerV);
     }];
     
     return headerV;
-    
-    
-#pragma 
-    
-//    UIView *headerV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-//    
-//    UIImageView *backImageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"头部背景"]];
-//    
-//    [headerV addSubview:backImageV];
-//    
-//    [self.view addSubview:headerV];
-//    
-//    
-//    
-//    //backImageV约束
-//    [backImageV mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.equalTo(headerV);
-//    }];
-//    
-//    //创建三个筛选按钮
-//    //    UIButton *ShiJian = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 107,44)];
-//    UIButton *ShiJian = [UIButton new];
-//    _ShiJian = ShiJian;
-//    
-//    [ShiJian setImage:[UIImage imageNamed:@"推荐时间"] forState:UIControlStateNormal];
-//    
-//    [ShiJian addTarget:self action:@selector(ShiJianClick) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [headerV addSubview:ShiJian];
-//    
-//    //    UIButton *ZhuangTai = [[UIButton alloc]initWithFrame:CGRectMake(107, 0, 107,44)];
-//    UIButton *ZhuangTai = [UIButton new];
-//    _ZhuangTai = ZhuangTai;
-//    
-//    [ZhuangTai setImage:[UIImage imageNamed:@"入职状态"] forState:UIControlStateNormal];
-//    
-//    [ZhuangTai addTarget:self action:@selector(ZhuangTaiClick) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [headerV addSubview:ZhuangTai];
-//    
-//    //    UIButton *DaiYu = [[UIButton alloc]initWithFrame:CGRectMake(214, 0, 107,44)];
-//    UIButton *DaiYu = [UIButton new];
-//    _DaiYu = DaiYu;
-//    
-//    [DaiYu setImage:[UIImage imageNamed:@"薪资待遇"] forState:UIControlStateNormal];
-//    
-//    [DaiYu addTarget:self action:@selector(DaiYuClick) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [headerV addSubview:DaiYu];
-//    
-//    //ShiJian约束
-//    
-//    int padding1 = ([UIScreen mainScreen].bounds.size.width/3);
-//    
-//    [ShiJian mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(padding1);
-//        make.height.equalTo(headerV);
-//        make.top.equalTo(headerV);
-//        make.left.equalTo(headerV);
-//    }];
-//    
-//    //ZhuangTai约束
-//    [ZhuangTai mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(padding1);
-//        make.height.equalTo(headerV);
-//        make.left.equalTo(ShiJian.mas_right);
-//        make.top.equalTo(headerV);
-//    }];
-//    
-//    //DaiYu约束
-//    [DaiYu mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(padding1);
-//        make.height.equalTo(headerV);
-//        make.right.equalTo(headerV);
-//        make.top.equalTo(headerV);
-//    }];
-//    
-
     
 }
 
