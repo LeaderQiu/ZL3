@@ -230,7 +230,7 @@
     
     [ShiJian setImage:[UIImage imageNamed:@"发布时间"] forState:UIControlStateNormal];
     
-    [ShiJian addTarget:self action:@selector(ShiJianClick) forControlEvents:UIControlEventTouchUpInside];
+    [ShiJian addTarget:self action:@selector(FaBuClick) forControlEvents:UIControlEventTouchUpInside];
     
     [headerV addSubview:ShiJian];
     
@@ -240,7 +240,7 @@
     
     [ZhuangTai setImage:[UIImage imageNamed:@"奖励金额"] forState:UIControlStateNormal];
     
-    [ZhuangTai addTarget:self action:@selector(ZhuangTaiClick) forControlEvents:UIControlEventTouchUpInside];
+    [ZhuangTai addTarget:self action:@selector(JiangLiClick) forControlEvents:UIControlEventTouchUpInside];
     
     [headerV addSubview:ZhuangTai];
     
@@ -250,11 +250,11 @@
     
     [DaiYu setImage:[UIImage imageNamed:@"更多筛选"] forState:UIControlStateNormal];
     
-    [DaiYu addTarget:self action:@selector(DaiYuClick) forControlEvents:UIControlEventTouchUpInside];
+    [DaiYu addTarget:self action:@selector(GengDuoClick) forControlEvents:UIControlEventTouchUpInside];
     
     [headerV addSubview:DaiYu];
     
-    //ShiJian约束
+    //发布时间约束
     
     int padding1 = ([UIScreen mainScreen].bounds.size.width/3);
     
@@ -265,7 +265,7 @@
         make.left.equalTo(headerV);
     }];
     
-    //ZhuangTai约束
+    //奖励金额约束
     [ZhuangTai mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(padding1);
         make.height.equalTo(headerV);
@@ -273,7 +273,7 @@
         make.top.equalTo(headerV);
     }];
     
-    //DaiYu约束
+    //更多筛选约束
     [DaiYu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(padding1);
         make.height.equalTo(headerV);
@@ -284,6 +284,8 @@
     return headerV;
     
 }
+
+//
 
 
 //设置TextField细节
