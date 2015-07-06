@@ -23,7 +23,6 @@
 
 @property(nonatomic,strong) UITableView *tableV;
 
-@property(nonatomic,strong) NSMutableArray *myArray;
 
 //存放的模型数组
 @property(nonatomic,strong) NSMutableArray *dataArray;
@@ -47,9 +46,6 @@
     
     [self setupTableV];
     
-    NSMutableArray *myArray = [NSMutableArray arrayWithObjects:@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"",nil];
-    _myArray =  myArray;
-    
     [self setupData];
 }
 
@@ -67,7 +63,7 @@
 -(void)setupData
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-                                          
+    
     NSDictionary *pamas = @{@"page":@"0",@"uid":@"1"};
     
     [mgr POST:UrlStrResumeList parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -77,7 +73,7 @@
         NSMutableArray *tempArray = [NSMutableArray array];
         
         for (NSDictionary *dictArray in dict) {
-       
+            
             PXRuname *Runame = [PXRuname objectWithKeyValues:dictArray];
             
             [tempArray addObject:Runame];
@@ -100,10 +96,10 @@
 
 -(void)setupFirstV
 {
-     UIView *FirstV = [UIView new];
+    UIView *FirstV = [UIView new];
     
     [FirstV setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"搜索栏Cell背景"]]];
-
+    
     
     //添加TextFiel
     UITextField *TextField = [UITextField new];
@@ -161,18 +157,29 @@
 {
     
     self.TextField.leftViewMode = UITextFieldViewModeNever;
-
+    
     
 }
+
+#warning TODO 监听无效
+//监听滑动，收起键盘
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.TextField resignFirstResponder];
+    
+    self.TextField.text = @" ";
+}
+
+
 
 //点击键盘搜索键，收回键盘.***跳转页面****
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
+    
     [textField resignFirstResponder];
     
     textField.text = @" ";
-   
+    
     return YES;
     
 }
@@ -211,13 +218,13 @@
 
 //几个cell
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return [_dataArray count];
 }
 
 //自定义cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+    
     static NSString *RunameID = @"RunameCell";
     
     PXRunameCell *cell = [tableView dequeueReusableCellWithIdentifier:RunameID];
@@ -225,7 +232,7 @@
     if (cell == nil) {
         cell = [[PXRunameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RunameID target:self action:@selector(EditBtnClick) target2:self action2:@selector(DeleteBtnClick)];
     }
-
+    
     
     return cell;
 }
@@ -234,11 +241,11 @@
 -(void)DeleteBtnClick
 {
     NSLog(@"删除简历");
-
+    
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     
-    [_myArray removeObjectAtIndex:indexPath.row];
+    [_dataArray removeObjectAtIndex:indexPath.row];
     
     [_tableV deleteRowsAtIndexPaths:@[indexPath]  withRowAnimation:UITableViewRowAnimationFade];
     
@@ -266,7 +273,7 @@
     
     
     
-//    UIButton *AddBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 300, 49)];
+    //    UIButton *AddBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 300, 49)];
     
     UIButton *AddBtn = [UIButton new];
     
@@ -292,7 +299,7 @@
     PXAddRunameViewController *AddV = [[PXAddRunameViewController alloc]init];
     
     [self.navigationController pushViewController:AddV animated:YES];
-
+    
 }
 
 
