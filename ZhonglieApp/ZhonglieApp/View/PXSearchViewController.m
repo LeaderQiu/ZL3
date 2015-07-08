@@ -285,7 +285,23 @@
     
 }
 
-//
+//点击发布时间按钮
+-(void)FaBuClick
+{
+    NSLog(@"点击了发布时间");
+}
+
+//点击发布时间按钮
+-(void)JiangLiClick
+{
+    NSLog(@"点击了奖励金额");
+}
+
+//点击发布时间按钮
+-(void)GengDuoClick
+{
+    NSLog(@"点击了更多筛选");
+}
 
 
 //设置TextField细节

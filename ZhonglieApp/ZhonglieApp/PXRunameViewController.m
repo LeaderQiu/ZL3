@@ -229,10 +229,15 @@
     
     PXRunameCell *cell = [tableView dequeueReusableCellWithIdentifier:RunameID];
     
+    PXRuname *runame = self.dataArray[indexPath.row];
+    
     if (cell == nil) {
         cell = [[PXRunameCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RunameID target:self action:@selector(EditBtnClick) target2:self action2:@selector(DeleteBtnClick)];
+        
+        
     }
     
+    cell.Runame = runame;
     
     return cell;
 }

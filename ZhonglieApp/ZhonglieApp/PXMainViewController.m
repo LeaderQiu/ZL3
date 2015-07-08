@@ -178,6 +178,20 @@
     //网络请求文字搜索
     [self setupSearch];
     
+    //网络请求-职位详情
+    [self setuppositionContent];
+    
+    //网络接口测试
+    [self setupText];
+    
+    //网络测试简历Add
+    [self setupAdd];
+    
+    //网络测试order接口
+    [self setupOrder];
+    
+    //网络测试orderList
+    [self setupOrderList];
     
     
 }
@@ -200,21 +214,172 @@
     }
     return _dataArray1;
 }
-//网络请求文字搜索
+
+//网络测试-职位详情
+-(void)setuppositionContent
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"pid":@"1"};
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/position/positionContent" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        NSLog(@"职位详情成功==》%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"职位详情失败==>%@",error);
+    }];
+}
+
+
+
+//网络测试orderAdd接口
+-(void)setupOrder
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"order_data":@{@"uid":@"1",
+                                            @"hid":@"1",
+                                            @"position_id":@"1",
+                                            @"resume_id":@"31",
+                                            @"position_created_time":@"2015.07.07",
+                                            @"position_reward":@"15000",
+                                            @"position_title":@"12",
+                                            @"position_salary":@"2000",
+                                            @"resume_name":@"Add小明",
+                                            @"resume_title":@"Add产品",
+                                    },
+                            
+                            
+                            };
+    
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/order/orderAdd" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        NSLog(@"order测试成功==》%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"order测试失败==>%@",error);
+    }];
+}
+
+//网络请求orderList
+-(void)setupOrderList
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"uid":@"2",
+                            @"order_time":@"0",
+                            @"order_status":@"0",
+                            @"order_reward":@"0",
+                            @"page":@"0"
+                            };
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/order/orderList" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        NSLog(@"已推荐筛选成功==》%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"已推荐筛选失败==>%@",error);
+    }];
+}
+//网络接口测试Add
+-(void)setupAdd
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{
+                            @"resume_data":@{@"title":@"Add产品",
+                                             @"name":@"Add小明",
+                                             @"sex":@"1",
+                                             @"age":@"18",
+                                             @"mobile":@"120",
+                                             @"school":@"北大",
+                                             @"professional":@"软件工程",
+                                             @"edu":@"2",
+                                             @"uid":@"1"
+                                             
+                                             },
+                            @"company1":@{@"company_name":@"普信科技",
+                                          @"duty":@"技术总监",
+                                          @"time":@"2年",
+                                          @"assess":@"哈哈哈哈哈哈哈"
+                                          
+                                          }
+                            };
+    
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeAdd" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        NSLog(@"add测试成功==》%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"add测试失败==>%@",error);
+    }];
+}
+
+
+//网络接口测试
+-(void)setupText
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *pamas = @{@"uid":@"1",
+                            @"resume_id":@"13",
+                            @"resume_data":@{@"title":@"产品",
+                                             @"name":@"小明明",
+                                             @"sex":@"1",
+                                             @"age":@"18",
+                                             @"mobile":@"120",
+                                             @"school":@"北大",
+                                             @"professional":@"软件工程",
+                                             @"edu":@"2"
+                                    
+                                              },
+                            @"company1":@{@"company_name":@"普信科技",
+                                          @"duty":@"技术总监",
+                                          @"time":@"2年",
+                                          @"assess":@"哈哈哈哈哈哈哈"
+                                    
+                                    }
+                            };
+    
+    
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeEditDo" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //
+        
+        NSLog(@"接口测试成功==》%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"接口测试失败==>%@",error);
+    }];
+}
+
+
+//网络请求简历列表
 -(void)setupSearch
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *pamas = @{@"page":@"0",@"keywords":@"产品",@"rewards":@"3"};
+    NSDictionary *pamas = @{@"page":@"0",@"uid":@"1"};
     
-    [mgr POST:UrlStrPositionSearch parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [mgr POST:@"http://123.57.147.235/index.php/home/resume/resumeList" parameters:pamas success:^(AFHTTPRequestOperation *operation, id responseObject) {
         //
         
-        NSLog(@"文字搜索成功==》%@",responseObject);
+        NSLog(@"简历列表成功==》%@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //
-        NSLog(@"文字搜索失败==>%@",error);
+        NSLog(@"简历列表失败==>%@",error);
     }];
     
     
@@ -257,7 +422,7 @@
 
 }
 
-//网络请求数据
+//网络请求-职位列表
 -(void)setupHTTPData
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -601,13 +766,7 @@
     if ([tableView isEqual:_SearchHistory]) {
         
         if (indexPath.row == 1) {
-            
-//            UIView *backV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
-//            backV.backgroundColor = [UIColor yellowColor];
-//            
-//            self.SearchHistory.sectionIndexBackgroundColor = [UIColor yellowColor];
-            
-            
+     
             static NSString *searchHistoryID = @"searchHistoryCell";
             
             PXSearchHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:searchHistoryID];

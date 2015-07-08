@@ -51,6 +51,7 @@
     
     self.RiqiLabel.text =Runame.created_time;
     
+    
     self.NameLabel.text = Runame.title;
 }
 
